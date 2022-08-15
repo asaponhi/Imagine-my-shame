@@ -1,16 +1,8 @@
 <template lang="pug">
-.p-introduce
-  .p-introduce__outer
-    .p-introduce__inner
-      .p-introduce__title
-        h1 CANVAS_2D INTRODUCE
-
-      .p-introduce__contents
-        .content
-          .content__title 
-            h2 lesson1 
-          
-
+.a-modal
+  .a-modal__outer
+    .a-modal__inner
+      .a-modal__contents
 
 </template>
 
@@ -31,7 +23,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.p-introduce{
+.a-modal{
   width: 100vw;
   height: 100vh;
   background-color: red;

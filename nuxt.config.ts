@@ -5,7 +5,10 @@ import Sass from 'sass'
 export default defineNuxtConfig({
   typescript: {
     strict: true
-  }
+  },
+  serverMiddleware: [
+    { path: "/server-api", handler: "~/server-middleware/index.ts" },
+  ],
 })
 
 
