@@ -5,14 +5,17 @@
       .p-imagine-my-shame__contents
         .content.content--select-player-modal
           TemplatesSelectPlayerModal
-        .content.content--questioner(v-if="questionerFlag")
+        //- .content.content--questioner(v-if="questionerFlag")
+        .content.content--questioner(v-if="state.questionerFlag")
           TemplatesQuestioner
-        .content.content--answerer(v-if="answererFlag")
+        .content.content--answerer(v-if="state.answererFlag")
           TemplatesAnswerer(:receiveMessage="receiveMessage")
 
 </template>
 
 <script setup lang="ts">
+const controllerStore = useControllerStore()
+const state = controllerStore.state
 </script>
 
 <script lang="ts">

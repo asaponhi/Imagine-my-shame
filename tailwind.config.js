@@ -1,18 +1,18 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './pages/**/*.{html,js}',
-    './components/**/*.{html,js}',
+    './pages/**/*.{vue,html,js}',
+    './components/**/*.{vue,html,js}',
   ],
   // content: [
   //   // './app.vue', // <= ドキュメントからさらに追加
   //   './components/**/*.{vue,js}',
   //   './layouts/**/*.vue',
-  //   './pages/**/*.vue',
+  //   './pages/**/*.vue',,
   //   './plugins/**/*.{js,ts}',
   //   // './nuxt.config.{js,ts}',
   // ],
-  darkMode: false, // or 'media' or 'class'
+  darkMode: 'media', // or 'media' or 'class'
   content: [],
   theme: {
     extend: {},
@@ -31,5 +31,6 @@ module.exports = {
     require("@tailwindcss/line-clamp"),
     // Docs: https://github.com/tailwindlabs/tailwindcss-line-clamp
     require("@tailwindcss/aspect-ratio"),
+    require('autoprefixer'),
   ],
 }
