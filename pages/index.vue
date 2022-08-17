@@ -8,7 +8,7 @@
         .content.content--questioner(v-if="questionerFlag")
           TemplatesQuestioner
         .content.content--answerer(v-if="answererFlag")
-          TemplatesAnswerer
+          TemplatesAnswerer(:receiveMessage="receiveMessage")
         //- test
         .content.content--count
           TemplatesCount
@@ -16,15 +16,9 @@
 </template>
 
 <script setup lang="ts">
-const answerStore = useAnswerStore()
-// answerStore.setAnswer(this.receiveMessage)
-
 </script>
 
 <script lang="ts">
-// import w3cwebsocket from 'websocket'
-// const WebSocket = w3cwebsocket
-
 export default {
   components: {
 
@@ -43,6 +37,7 @@ export default {
   },
   mounted() {
     this.onConnectWebSocket()
+    this.receiveMessage = 'test'
   },
   methods: {
     onConnectWebSocket() {
@@ -52,10 +47,8 @@ export default {
           let resData = JSON.parse(e.data)
           console.log("resData", resData)
           if (resData.action = 'send_message') {
-            this.receiveMessage = resData
-            answerStore.setAnswer(resData.message)
+            this.receiveMessage = resData.message
           }
-
         }
       }
     }

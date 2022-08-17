@@ -10,14 +10,32 @@
           .content__answer
             .answer
               //- state
+              //- .answer__text {{ answerStore.getState(receiveMessage).answer }}
               .answer__text {{ state.answer }}
               //- <button @click="answerStore.setAnswer('aaa')">setAnswer</button>
 
 </template>
 
 <script setup lang="ts">
+interface Props{
+  receiveMessage: string;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  receiveMessage: ''
+})
+
 const answerStore = useAnswerStore()
+// console.log("props",props.receiveMessage)
+// answerStore.setAnswer(props.receiveMessage)
 const state = answerStore.state
+
+watch(() => props.receiveMessage, () => {
+  answerStore.setAnswer(props.receiveMessage)
+})
+
+
+
 </script>
 
 <script lang="ts">
