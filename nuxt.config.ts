@@ -6,8 +6,18 @@ export default defineNuxtConfig({
   typescript: {
     strict: true
   },
+  nitro: {
+    preset: 'node',
+  },
   serverMiddleware: [
   ],
+  // buildModules: ['@nuxtjs/tailwindcss'],
+  css: ['@/assets/css/tailwind.css'],
+  build: {
+    postcss: {
+      postcssOptions: require('./postcss.config.js'),
+    }
+  },
 })
 
 

@@ -12,7 +12,7 @@ class AnswerStore {
   _state: Ref<AnswerState>
   constructor() {
     this._state = useState<AnswerState>('answer_state', () => ({
-      answer:'test',
+      answer:'',
     }))
   }
 
