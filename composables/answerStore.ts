@@ -21,13 +21,6 @@ class AnswerStore {
   }
 
   setAnswer(answer: string) {
-    console.log("setAnswer",answer)
     this._state.value.answer = answer
-  }
-
-  getState(answer: string) {
-    console.log("getAnswer",answer)
-    this._state.value.answer = answer
-    return this._state
   }
 }

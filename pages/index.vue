@@ -9,9 +9,6 @@
           TemplatesQuestioner
         .content.content--answerer(v-if="answererFlag")
           TemplatesAnswerer(:receiveMessage="receiveMessage")
-        //- test
-        .content.content--count
-          TemplatesCount
 
 </template>
 

@@ -9,10 +9,7 @@
         .content
           .content__answer
             .answer
-              //- state
-              //- .answer__text {{ answerStore.getState(receiveMessage).answer }}
               .answer__text {{ state.answer }}
-              //- <button @click="answerStore.setAnswer('aaa')">setAnswer</button>
 
 </template>
 
@@ -26,10 +23,8 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const answerStore = useAnswerStore()
-// console.log("props",props.receiveMessage)
-// answerStore.setAnswer(props.receiveMessage)
 const state = answerStore.state
-
+// setupでthisは使えない。そこで、propで渡して、watchで値の変更を検知したら、setAnswerで更新して、リアクティブになるようにした。
 watch(() => props.receiveMessage, () => {
   answerStore.setAnswer(props.receiveMessage)
 })
@@ -61,20 +56,6 @@ export default {
 }
 
 .t-answerer__contents{
-  .content__input{
-    width:60%;
-    height:20%;
-
-    .input__textarea{
-      width:100%;
-      height:100%;
-    }
-
-    // .input__submit{
-    //   width
-    // }
-  }
-
 }
 
 </style>
