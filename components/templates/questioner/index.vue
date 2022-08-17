@@ -5,15 +5,15 @@
       .t-questioner__title
         h2 質問者ページ
 
-      form.t-questioner__contents(method="post" action="/create")
+      form.t-questioner__contents(method="post")
         .content
           .content__input
             .input
-              <input type="text" name="msg">
-              <input type="submit" value="送信する">
+              //- <input type="text" name="msg">
+              //- <input type="submit" value="送信する">
+              textarea.input__textarea(v-model="inputText" name="textarea" maxlength="500" placeholder="入力してください。" @keydown.enter.exact="keyDownEnter" @keyup.enter.exact="keyUpEnter")
               //- textarea.input__textarea(v-model="inputText" name="textarea" maxlength="500" placeholder="口にするのは難しいあなたの恥や悩みを入力してください。" @keydown.enter.exact="keyDownEnter" @keyup.enter.exact="keyUpEnter")
-              //- button.input__submit(type="submit") 送信
-              //- button.input__submit(type="button" @click="sendMessage()") 送信
+              button.input__submit(type="button" @click="sendMessage()") 送信
           
 
 </template>
@@ -50,14 +50,13 @@ export default {
     //   });
     //   console.log("送信")
     // }
-    sendMessage() {
+    async sendMessage() {
       // send
-      const { data: message } =  useFetch('/api/message', {
+      const { data: message } = await useFetch('/api/message', {
         method: 'POST',
-        body: 'this.inputText'
-        // body: this.inputText
+        body: { message: this.inputText }
       });
-      console.log("送信")
+      console.log("送信",message)
     }
   }
 }
