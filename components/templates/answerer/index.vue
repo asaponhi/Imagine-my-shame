@@ -21,7 +21,13 @@
 const answerStore = useAnswerStore()
 const state = answerStore.state
 
-const { data: message } = await useFetch('/api/message')
+// const { data: message } = await useFetch('/api/message')
+// console.log("answer:", message)
+const { data: message } = await useFetch('/api/submit')
+//   const { data: message } = await useFetch('/api/submit', {
+//   method: 'post',
+//   body: { test: 123 }
+// })
 console.log("answer:", message)
 // console.log("answer:", message.value.id)
 
@@ -38,9 +44,12 @@ export default {
 
   },
   mounted() {
-    
+    // this.addCompany('test')
   },
   methods: {
+    async addCompany(data){
+      await $fetch('/api/submit', { method: 'post', body: { test: 123 } })
+    },
     sendMessage() {
       // send
       console.log("送信")
