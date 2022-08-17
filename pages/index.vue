@@ -9,19 +9,15 @@
           TemplatesQuestioner
         .content.content--answerer(v-if="answererFlag")
           TemplatesAnswerer
-
-  <div>
-  <div>{{ state.count }}</div>
-  <button @click="counterStore.countUp">countUp</button>
-
-  <button @click="counterStore.setCount(0)">reset</button>
-</div>
+        //- test
+        .content.content--count
+          TemplatesCount
 
 </template>
 
 <script setup lang="ts">
-const counterStore = useCounterStore();
-const { state } = counterStore;
+// const counterStore = useCounterStore();
+// const { state } = counterStore;
 </script>
 
 <script lang="ts">

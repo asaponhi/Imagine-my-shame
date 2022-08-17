@@ -1,12 +1,47 @@
-import express from "express"
-const app = express()
+// ~/server/index.ts
+import { Request, Response } from "express";
+// import * as HttpStatus from "http-status-codes";
 
-app.use(express.json())
+import bodyParser from "body-parser";
+import express from "express";
 
-app.get("/", (req, res) => {
-  res.json({
-    message:"test"
-  })
-})
+const app = express();
 
-export default app
+// setup body-parser
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+
+// select
+app.post("/api/message", async (req: Request, res: Response) => {
+   // ...
+  return 'a'
+});
+
+// // update
+// app.post("/api/update", async (req: Request, res: Response) => {
+//    // ...
+// });
+
+// // delete
+// app.post("/api/delete", async (req: Request, res: Response) => {
+//   // ...
+// });
+
+export default app;
+
+
+
+
+// import express from "express"
+// const app = express()
+
+// app.use(express.json())
+
+// app.get("/", (req, res) => {
+//   res.json({
+//     message:"test"
+//   })
+// })
+
+// export default app

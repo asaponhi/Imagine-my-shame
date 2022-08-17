@@ -5,17 +5,31 @@
       .t-questioner__title
         h2 質問者ページ
 
-      .t-questioner__contents
+      form.t-questioner__contents(method="post" action="/create")
         .content
           .content__input
             .input
-              textarea.input__textarea(v-model="inputText" name="textarea" maxlength="500" placeholder="口にするのは難しいあなたの恥や悩みを入力してください。" @keydown.enter.exact="keyDownEnter" @keyup.enter.exact="keyUpEnter")
-              button.input__submit(type="submit" @click="sendMessage()") 送信
+              <input type="text" name="msg">
+              <input type="submit" value="送信する">
+              //- textarea.input__textarea(v-model="inputText" name="textarea" maxlength="500" placeholder="口にするのは難しいあなたの恥や悩みを入力してください。" @keydown.enter.exact="keyDownEnter" @keyup.enter.exact="keyUpEnter")
+              //- button.input__submit(type="submit") 送信
+              //- button.input__submit(type="button" @click="sendMessage()") 送信
           
 
 </template>
 
-<script>
+<script setup lang="ts">
+
+// const submit()=>{
+//   const { data: message } = await useFetch('/api/', {
+//     method: 'POST',
+//     body: 'this.inputText',
+//   });
+// }
+
+</script>
+
+<script lang="ts">
 export default {
   data() {
     return {
@@ -29,8 +43,20 @@ export default {
     
   },
   methods: {
+    // async sendMessage() {
+    //   await $fetch('/api/message', {
+    //     method: 'POST',
+    //     body: this.inputText
+    //   });
+    //   console.log("送信")
+    // }
     sendMessage() {
       // send
+      const { data: message } =  useFetch('/api/message', {
+        method: 'POST',
+        body: 'this.inputText'
+        // body: this.inputText
+      });
       console.log("送信")
     }
   }

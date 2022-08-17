@@ -9,13 +9,25 @@
         .content
           .content__answer
             .answer
-              
-            
-          
+              //- fetch
+              .answer__text {{ message }}
+              //- state
+              //- .answer__text {{ state.answer }}
+              //- <button @click="answerStore.setAnswer('aaa')">setAnswer</button>
 
 </template>
 
-<script>
+<script setup lang="ts">
+const answerStore = useAnswerStore()
+const state = answerStore.state
+
+const { data: message } = await useFetch('/api/message')
+console.log("answer:", message)
+// console.log("answer:", message.value.id)
+
+</script>
+
+<script lang="ts">
 export default {
   data() {
     return {
