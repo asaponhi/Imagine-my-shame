@@ -16,11 +16,14 @@
 </template>
 
 <script setup lang="ts">
-// const counterStore = useCounterStore();
-// const { state } = counterStore;
+const answerStore = useAnswerStore()
+// answerStore.setAnswer(this.receiveMessage)
+
 </script>
 
 <script lang="ts">
+// import w3cwebsocket from 'websocket'
+// const WebSocket = w3cwebsocket
 
 export default {
   components: {
@@ -30,15 +33,32 @@ export default {
     return {
       questionerFlag: true,
       answererFlag: true,
+      // socket
+      socket: new WebSocket("ws://localhost:3030"),
+      receiveMessage: ''
     }
   },
   computes: {
 
   },
   mounted() {
-    // console.log("selectPlayerModal", selectPlayerModal)
+    this.onConnectWebSocket()
   },
   methods: {
+    onConnectWebSocket() {
+      this.socket.onopen = () => {
+        // 受信 
+        this.socket.onmessage = (e) => {
+          let resData = JSON.parse(e.data)
+          console.log("resData", resData)
+          if (resData.action = 'send_message') {
+            this.receiveMessage = resData
+            answerStore.setAnswer(resData.message)
+          }
+
+        }
+      }
+    }
   }
 }
 </script>

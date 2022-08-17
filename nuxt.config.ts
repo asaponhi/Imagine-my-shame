@@ -8,7 +8,7 @@ export default defineNuxtConfig({
   },
   serverMiddleware: [
     // { path: "/server-api", handler: "~/server-middleware/api/message.ts" },
-    { path: "/server-api", handler: "~/server-middleware/index.ts" },
+    // { path: "/server-api", handler: "~/server/middleware/index.ts" },
   ],
 })
 

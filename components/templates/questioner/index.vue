@@ -9,30 +9,22 @@
         .content
           .content__input
             .input
-              //- <input type="text" name="msg">
-              //- <input type="submit" value="送信する">
               textarea.input__textarea(v-model="inputText" name="textarea" maxlength="500" placeholder="入力してください。" @keydown.enter.exact="keyDownEnter" @keyup.enter.exact="keyUpEnter")
               //- textarea.input__textarea(v-model="inputText" name="textarea" maxlength="500" placeholder="口にするのは難しいあなたの恥や悩みを入力してください。" @keydown.enter.exact="keyDownEnter" @keyup.enter.exact="keyUpEnter")
-              button.input__submit(type="button" @click="sendMessage()") 送信
+              button.input__submit(type="button" @click="onSendMessage()") 送信
           
 
 </template>
 
-<script setup lang="ts">
-
-// const submit()=>{
-//   const { data: message } = await useFetch('/api/', {
-//     method: 'POST',
-//     body: 'this.inputText',
-//   });
-// }
-
-</script>
-
 <script lang="ts">
+// import w3cwebsocket from 'websocket'
+// const WebSocket = w3cwebsocket
+
 export default {
   data() {
     return {
+      // socket
+      socket: new WebSocket("ws://localhost:3030"),
       inputText: '',
     }
   },
@@ -43,20 +35,12 @@ export default {
     
   },
   methods: {
-    // async sendMessage() {
-    //   await $fetch('/api/message', {
-    //     method: 'POST',
-    //     body: this.inputText
-    //   });
-    //   console.log("送信")
-    // }
-    async sendMessage() {
-      // send
-      const { data: message } = await useFetch('/api/message', {
-        method: 'POST',
-        body: { message: this.inputText }
-      });
-      console.log("送信",message)
+    onSendMessage() {
+      this.socket.send(JSON.stringify({
+        'action': 'send_message',
+        'message': this.inputText
+      }))
+      this.inputText =""
     }
   }
 }
