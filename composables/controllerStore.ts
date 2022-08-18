@@ -23,6 +23,7 @@ class ControllerStore {
   }
 
   setQuestionerController(flag: boolean) {
+    console.log
     this._state.value.questionerFlag = flag
   }
   
