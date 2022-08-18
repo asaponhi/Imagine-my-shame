@@ -14,19 +14,24 @@
 </template>
 
 <script setup lang="ts">
+const answerStore = useAnswerStore()
+const state = answerStore.state
+
 interface Props{
   receiveMessage: string;
 }
-
 const props = withDefaults(defineProps<Props>(), {
   receiveMessage: ''
 })
 
-const answerStore = useAnswerStore()
-const state = answerStore.state
+const placeholder: string = '出題者の入力したテキストが表示されます'
+localStorage.saveKey != null ? answerStore.setAnswer(localStorage.saveKey) : answerStore.setAnswer(placeholder)
+
 // setupでthisは使えない。そこで、propで渡して、watchで値の変更を検知したら、setAnswerで更新して、リアクティブになるようにした。
 watch(() => props.receiveMessage, () => {
   answerStore.setAnswer(props.receiveMessage)
+  // ブラウザをリロードしても値を保持できるように。
+  localStorage.saveKey = props.receiveMessage
 })
 
 
@@ -34,6 +39,7 @@ watch(() => props.receiveMessage, () => {
 </script>
 
 <script lang="ts">
+
 export default {
   data() {
     return {

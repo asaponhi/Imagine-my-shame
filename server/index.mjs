@@ -1,9 +1,23 @@
 import express from 'express'
-import { WebSocketServer } from 'ws'
 
 const host = process.env.HOST || 'localhost'
 const port = process.env.PORT || 3030
-// 3
+
+// 6 throw new SyntaxError(`Invalid URL: ${address}`);
+// import Server from 'ws'
+// const wss = new Server({ port: port });
+// 5
+// import ws from 'ws'
+// const server = ws.Server
+// const wss = new server({ port: port });
+
+// 4
+// ReferenceError: require is not defined in ES module scope, you can use import instead
+// var server = require('ws').Server;
+// var wss = new server({ port: port });
+
+// 3 return Blob
+import { WebSocketServer } from 'ws'
 const wss = new WebSocketServer({ port: port });
 
 // 2

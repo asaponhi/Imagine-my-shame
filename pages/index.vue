@@ -5,10 +5,9 @@
       .p-imagine-my-shame__contents
         .content.content--select-player-modal
           TemplatesSelectPlayerModal
-        //- .content.content--questioner(v-if="questionerFlag")
-        .content.content--questioner(v-if="state.questionerFlag")
+        .content.content--questioner(v-show="state.questionerFlag")
           TemplatesQuestioner
-        .content.content--answerer(v-if="state.answererFlag")
+        .content.content--answerer(v-show="state.answererFlag")
           TemplatesAnswerer(:receiveMessage="receiveMessage")
 
 </template>
@@ -19,6 +18,8 @@ const state = controllerStore.state
 </script>
 
 <script lang="ts">
+import fileReader from "~/assets/script/fileReader"
+
 export default {
   components: {
 
@@ -29,7 +30,7 @@ export default {
       answererFlag: true,
       // socket
       socket: new WebSocket("ws://localhost:3030"),
-      receiveMessage: ''
+      receiveMessage: localStorage.saveKey != null ? localStorage.saveKey : ''
     }
   },
   computes: {
@@ -37,18 +38,24 @@ export default {
   },
   mounted() {
     this.onConnectWebSocket()
-    this.receiveMessage = 'test'
   },
   methods: {
     onConnectWebSocket() {
       this.socket.onopen = () => {
         // 受信 
         this.socket.onmessage = (e) => {
-          let resData = JSON.parse(e.data)
-          console.log("resData", resData)
-          if (resData.action = 'send_message') {
-            this.receiveMessage = resData.message
-          }
+          const blobToJson = async () => {
+            const blobText = await fileReader(e.data);
+            return JSON.parse(blobText);
+          };
+          blobToJson().then(
+            (resData) => {
+              if (resData.action = 'send_message') {
+                this.receiveMessage = resData.message
+              }
+            }, (error) => {
+              console.log("promise error", error.message)
+            })
         }
       }
     }

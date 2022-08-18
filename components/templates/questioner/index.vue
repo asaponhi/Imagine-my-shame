@@ -3,7 +3,7 @@
   .t-questioner__outer
     .t-questioner__inner
       .t-questioner__title
-        h2 質問者ページ
+        h2 出題者ページ
 
       form.t-questioner__contents(method="post")
         .content
@@ -17,10 +17,9 @@
 </template>
 
 <script lang="ts">
-// import w3cwebsocket from 'websocket'
-// const WebSocket = w3cwebsocket
 
 export default {
+  
   data() {
     return {
       // socket
@@ -40,7 +39,7 @@ export default {
         'action': 'send_message',
         'message': this.inputText
       }))
-      this.inputText =""
+      this.inputText = ""
     }
   }
 }
