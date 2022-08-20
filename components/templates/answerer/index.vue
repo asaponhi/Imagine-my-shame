@@ -7,7 +7,7 @@
 
       .t-answerer__contents
         .content
-          .content__default(v-show="openFlag === false") {{ placeholder }}
+          .content__default {{ placeholder }}
           .content__answer(v-show="openFlag")
             .answer
               .answer__text {{ state.answer }}

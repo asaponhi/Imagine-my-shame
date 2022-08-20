@@ -15,6 +15,8 @@
 <script setup lang="ts">
 const controllerStore = useControllerStore()
 const state = controllerStore.state
+const answerStore = useAnswerStore()
+
 </script>
 
 <script lang="ts">
@@ -43,20 +45,33 @@ export default {
     onConnectWebSocket() {
       this.socket.onopen = () => {
         // 受信 
+        /*
+        PART1 こっちで上手く行く時とエラー出る時がある。その時はPART２を動かす。
+        */ 
         this.socket.onmessage = (e) => {
-          const blobToJson = async () => {
-            const blobText = await fileReader(e.data);
-            return JSON.parse(blobText);
-          };
-          blobToJson().then(
-            (resData) => {
-              if (resData.action = 'send_message') {
-                this.receiveMessage = resData.message
-              }
-            }, (error) => {
-              console.log("promise error", error.message)
-            })
+          let resData = JSON.parse(e.data)
+          console.log("resData", resData)
+          if (resData.action = 'send_message') {
+            this.receiveMessage = resData.message
+          }
         }
+        /*
+        PART2 こっちで上手く行く時とエラー出る時がある。その時はPART1を動かす。
+        */ 
+        // this.socket.onmessage = (e) => {
+        //   const blobToJson = async () => {
+        //     const blobText = await fileReader(e.data);
+        //     return JSON.parse(blobText);
+        //   };
+        //   blobToJson().then(
+        //     (resData) => {
+        //       if (resData.action = 'send_message') {
+        //         this.receiveMessage = resData.message
+        //       }
+        //     }, (error) => {
+        //       console.log("promise error", error.message)
+        //     })
+        // }
       }
     }
   }
