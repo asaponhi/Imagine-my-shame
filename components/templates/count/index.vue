@@ -3,7 +3,7 @@
   .t-count__outer
     .t-count__inner
       .t-count__title
-        h2 countページ
+        h3 countページ
 
       .t-count__contents
         .content

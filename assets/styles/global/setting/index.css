@@ -1,0 +1,26 @@
+@charset "UTF-8";
+/***
+ヒラギノ角ゴのfont-weightと実際に使われるウェイトの対応の表:
+CSS font-weight	Firefox	Chrome
+100	W0	W0
+200	W2	W1
+300	W3	W3
+400	W4	W4
+500	W5	W5
+600	W6	W6
+700	W7	W7
+800	W8	W8
+900	W9	W9
+
+
+Hiragino Kaku Gothic Pro で指定すると、、
+
+font-weight: normal; → W3
+font-weight: 300; → W3
+font-weight: 400; → W3
+font-weight: bold; → W6
+font-weight: 600; → W6
+font-weight: 700; → W6
+
+w6は使えるけど、w4はw3に変更する
+***//*# sourceMappingURL=index.css.map */

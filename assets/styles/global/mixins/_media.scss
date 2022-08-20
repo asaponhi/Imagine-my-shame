@@ -1,0 +1,20 @@
+@use "../setting/" as *;
+
+/* SP */
+@mixin sp(){
+  @media all and (max-width: #{$break-point}px){
+    @content;
+  }
+}
+
+/* PC */
+@mixin pc(){
+  @media all and (min-width: #{$break-point+1}px){
+    @content;
+  }
+}
+@mixin over(){
+  @media all and (min-width: #{$max-vw-width}){
+    @content;
+  }
+}

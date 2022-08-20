@@ -1,0 +1,65 @@
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+body {
+  width: 100%;
+  font-family: $font-family-jp;
+  font-weight: 300;
+  // color: $main-text-color;
+  letter-spacing: custom-letter-spacing();
+  line-height: 1.8;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: 'palt';
+}
+
+img,
+video,
+iframe {
+  width: 100%;
+}
+
+button {
+  padding: 0;
+  font-family: inherit;
+  font-weight: inherit;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  appearance: none;
+  cursor: pointer;
+
+  &:hover,
+  &:active,
+  &:focus {
+    outline: 0;
+  }
+}
+
+a {
+  cursor: pointer;
+
+  &:link,
+  &:visited,
+  &:hover,
+  &:active {
+    color: inherit;
+  }
+}
+
+[data-whatinput="mouse"] *:focus,
+[data-whatinput="touch"] *:focus {
+  outline: none;
+}

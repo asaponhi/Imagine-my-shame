@@ -1,0 +1,78 @@
+@use '../setting/'as *;
+@use 'media'as *;
+@use 'sass:math';
+
+// sizeには、SPデザインのサイズを入れる
+@function vwsp($size, $viewport:$sp-design-width){
+  @return math.div($size ,$viewport) * 100vw;
+}
+// sizeには、PCデザインのサイズを入れる
+@function vwpc($size, $viewport:$pc-design-width){
+  @return math.div($size ,$viewport) * 100vw;
+}
+// sizeには、PCデザインのサイズを入れる
+@function vwmax($size, $viewport:$pc-design-width){
+  @return ($size * $max-vw-width / $viewport) px;
+}
+@function decimal-calc($number, $digits:0, $mode:"round") {
+  $n:1;
+  @if $digits > 0 {
+    @for $i from 1 through $digits {
+      $n: $n * 10;
+    }
+  }
+  @if $mode == "round" {
+    // 数値の小数点以下を四捨五入
+    @return round($number * $n) / $n;
+  } @else if $mode == "ceil" {
+    // 数値の小数点以下を切り上げる
+    @return ceil($number * $n) / $n;
+  } @else if $mode == "floor" {
+    // 数値の小数点以下切り下げる
+    @return floor($number * $n) / $n;
+  }
+}
+
+// font setting
+// pc
+@mixin font-set-pc($fs, $lh:null, $ls:null, $fw:null) {
+  @include pc(){
+    font-size:vwpc($fs);
+    @if $lh != null{
+      line-height:($lh / $fs) em ;
+    }
+    @if $ls != null{
+      letter-spacing:($ls / 1000) em ;
+    }
+    @if $fw != null{
+      font-weight:$fw;
+    }
+  }
+}
+// sp
+@mixin font-set-sp($fs, $lh:null, $ls:null, $fw:null){
+  @include sp(){
+    font-size:vwsp($fs);
+    @if $lh != null{
+      line-height:($lh / $fs) em ;
+    }
+    @if $ls != null{
+      letter-spacing:($ls / 1000) em ;
+    }
+    @if $fw != null{
+      font-weight:$fw ;
+    }
+  }
+}
+// ref: https://i-studio.commits.jp/mitsubishichemical/ams-renewal/-/issues/68
+@function custom-letter-spacing($designSize:30){
+  // @return $designSize/ 1000+0.07em;
+  @return math.div($designSize, 1000)+0.07em;
+}
+
+@mixin setSpHeight() {
+  @include sp(){
+    min-height:100vh ;
+    min-height:calc(var(--vh, 1vh) * 100);
+  }
+}

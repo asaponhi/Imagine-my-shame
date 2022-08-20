@@ -1,0 +1,46 @@
+$pc-design-width : 1440;
+$sp-design-width : 750;
+$max-vw-width : 1600;
+$break-point : 750;
+
+// font
+$font-family-en : 'Montserrat', sans-serif;
+$font-family-jp : 'ヒラギノ角ゴ Std','Hiragino Sans', sans-serif;
+
+// color
+$white-900 : #fff;
+$red-800 : #FE7173;
+$red-700 : #EC1315;
+$red-300 : #bc002d;
+$gray-800 : #F4F4F4;
+$gray-600 : #D5D5D5;
+$gray-500 : #C3C3C3;
+$black-900 : #000;
+$black-100 : #4E4E4E;
+$black-50 : #313131;
+
+/***
+ヒラギノ角ゴのfont-weightと実際に使われるウェイトの対応の表:
+CSS font-weight	Firefox	Chrome
+100	W0	W0
+200	W2	W1
+300	W3	W3
+400	W4	W4
+500	W5	W5
+600	W6	W6
+700	W7	W7
+800	W8	W8
+900	W9	W9
+
+
+Hiragino Kaku Gothic Pro で指定すると、、
+
+font-weight: normal; → W3
+font-weight: 300; → W3
+font-weight: 400; → W3
+font-weight: bold; → W6
+font-weight: 600; → W6
+font-weight: 700; → W6
+
+w6は使えるけど、w4はw3に変更する
+***/

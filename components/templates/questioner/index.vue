@@ -3,7 +3,7 @@
   .t-questioner__outer
     .t-questioner__inner
       .t-questioner__title
-        h2 出題者ページ
+        h3 出題者ページ
 
       form.t-questioner__contents(method="post")
         .content
@@ -12,6 +12,10 @@
               textarea.input__textarea(v-model="inputText" name="textarea" maxlength="500" placeholder="入力してください。" @keydown.enter.exact="keyDownEnter" @keyup.enter.exact="keyUpEnter")
               //- textarea.input__textarea(v-model="inputText" name="textarea" maxlength="500" placeholder="口にするのは難しいあなたの恥や悩みを入力してください。" @keydown.enter.exact="keyDownEnter" @keyup.enter.exact="keyUpEnter")
               button.input__submit(type="button" @click="onSendMessage()") 送信
+          .content__output(v-if="outputFlag")
+            .output
+              span.output__title あなたが入力した言葉は
+              span.output__input-text {{ `"${outputText}"` }}
           
 
 </template>
@@ -25,6 +29,8 @@ export default {
       // socket
       socket: new WebSocket("ws://localhost:3030"),
       inputText: '',
+      outputText: '',
+      outputFlag: false
     }
   },
   computes: {
@@ -39,6 +45,8 @@ export default {
         'action': 'send_message',
         'message': this.inputText
       }))
+      this.outputText = this.inputText
+      this.outputFlag = true
       this.inputText = ""
     }
   }
@@ -61,9 +69,14 @@ export default {
       height:100%;
     }
 
-    // .input__submit{
-    //   width
-    // }
+    .input__submit{
+      padding:5px;
+      border: 1px solid black;
+    }
+  }
+
+  .output{
+    font-size: 14px;
   }
 
 }

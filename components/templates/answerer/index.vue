@@ -3,13 +3,15 @@
   .t-answerer__outer
     .t-answerer__inner
       .t-answerer__title
-        h2 回答者ページ
+        h3 回答者ページ
 
       .t-answerer__contents
         .content
-          .content__answer
+          .content__default(v-show="openFlag === false") {{ placeholder }}
+          .content__answer(v-show="openFlag")
             .answer
               .answer__text {{ state.answer }}
+          button.content__button(@click="openFlagControl(true)" v-if="openFlag === false") 答えを見る
 
 </template>
 
@@ -24,11 +26,12 @@ const props = withDefaults(defineProps<Props>(), {
   receiveMessage: ''
 })
 
-const placeholder: string = '出題者の入力したテキストが表示されます'
+const placeholder: string = '出題者の入力したテキストがここに表示されます'
 localStorage.saveKey != null ? answerStore.setAnswer(localStorage.saveKey) : answerStore.setAnswer(placeholder)
 
 // setupでthisは使えない。そこで、propで渡して、watchで値の変更を検知したら、setAnswerで更新して、リアクティブになるようにした。
 watch(() => props.receiveMessage, () => {
+  console.log("setAnswer", props.receiveMessage)
   answerStore.setAnswer(props.receiveMessage)
   // ブラウザをリロードしても値を保持できるように。
   localStorage.saveKey = props.receiveMessage
@@ -43,6 +46,7 @@ watch(() => props.receiveMessage, () => {
 export default {
   data() {
     return {
+      openFlag:false
     }
   },
   computes: {
@@ -51,6 +55,9 @@ export default {
   mounted() {
   },
   methods: {
+    openFlagControl(flag) {
+      this.openFlag = flag
+    }
   }
 }
 </script>
