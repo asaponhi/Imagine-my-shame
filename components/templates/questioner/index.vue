@@ -7,10 +7,12 @@
 
       form.t-questioner__contents(method="post")
         .content
+          .content__title 口にするのは難しいあなたの恥や悩みを入力してください。
+
           .content__input
             .input
               //- textarea.input__textarea(v-model="inputText" name="textarea" maxlength="500" placeholder="入力してください。" @keydown.enter.exact="keyDownEnter" @keyup.enter.exact="keyUpEnter")
-              textarea.input__textarea(v-model="inputText" name="textarea" maxlength="500" placeholder="口にするのは難しいあなたの恥や悩みを入力してください。" @keydown.enter.exact="keyDownEnter" @keyup.enter.exact="keyUpEnter")
+              textarea.input__textarea(v-model="inputText" name="textarea" maxlength="500" :placeholder="placeholder" @keydown.enter.exact="keyDownEnter" @keyup.enter.exact="keyUpEnter")
               button.input__submit(type="button" @click="onSendMessage()") 送信
           .content__output(v-if="outputFlag")
             .output
@@ -29,6 +31,8 @@ export default {
       // socket
       // socket: new WebSocket("ws://localhost:3030"),
       socket: new WebSocket("wss://cloud.achex.ca/imagine-my-shame-1"),
+      // placeholder: '口にするのは難しいあなたの恥や悩みを入力してください。',
+      placeholder: 'ex) 実は・・・・。',
       inputText: '',
       outputText: '',
       outputFlag: false

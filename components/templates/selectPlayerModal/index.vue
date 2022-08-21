@@ -3,9 +3,12 @@
   .t-select-player-modal__outer
     .t-select-player-modal__inner
       .t-select-player-modal__title
-        h3 出題者か回答者を選択してください
+        h1 IMAGINE-MY-SHAME
+      p.t-select-player-modal__lead
+        | 出題者の入力した内容を回答者が会話をして当てるゲームです。
+        br
+        | 出題者か回答者を選択してください。
       .t-select-player-modal__contents
-        //- button.content(@click="controllerStore.setQuestionerController(true);modalClose()")
         .content
           .content__inner
             button.content__button(@click="controllerStore.setQuestionerController(true);modalClose()") 出題者
@@ -14,11 +17,6 @@
         .content
           .content__inner
             button.content__button(@click="controllerStore.setAnswererController(true);modalClose()") 回答者
-        //- button.content(@click="controllerStore.setAnswererController(true);modalClose()")
-        //-   .content__inner
-        //-     .content__title
-        //-       h3 回答者
-
 
 </template>
 

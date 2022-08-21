@@ -39,10 +39,12 @@
   @include pc(){
     font-size:vwpc($fs);
     @if $lh != null{
-      line-height:($lh / $fs) em ;
+      line-height:math.div($lh , $fs) em;
+      // line-height:($lh / $fs) em;
     }
     @if $ls != null{
-      letter-spacing:($ls / 1000) em ;
+      letter-spacing:math.div($ls , 1000) em;
+      // letter-spacing:($ls / 1000) em;
     }
     @if $fw != null{
       font-weight:$fw;
@@ -57,7 +59,8 @@
       line-height:($lh / $fs) em ;
     }
     @if $ls != null{
-      letter-spacing:($ls / 1000) em ;
+      letter-spacing:math.div($ls, 1000) em;
+      // letter-spacing:($ls / 1000) em;
     }
     @if $fw != null{
       font-weight:$fw ;

@@ -12,7 +12,8 @@ class AnswerStore {
   _state: Ref<AnswerState>
   constructor() {
     this._state = useState<AnswerState>('answer_state', () => ({
-      answer:'',
+      answer: '',
+      openFlag:false
     }))
   }
 
@@ -23,5 +24,8 @@ class AnswerStore {
   setAnswer(answer: string) {
     console.log("setAnswer",answer)
     this._state.value.answer = answer
+  }
+  setOpenFlag(flag: boolean) {
+    this._state.value.openFlag = flag
   }
 }

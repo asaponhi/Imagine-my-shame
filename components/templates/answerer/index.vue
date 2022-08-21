@@ -7,11 +7,12 @@
 
       .t-answerer__contents
         .content
-          .content__default {{ placeholder }}
-          .content__answer(v-show="openFlag")
+          .content__default(v-html="placeholder")
+          .content__answer
             .answer
-              .answer__text {{ state.answer }}
-          button.content__button(@click="openFlagControl(true)" v-if="openFlag === false") 答えを見る
+              //- .answer__default(v-html="placeholder" v-show="state.openFlag === false")
+              .answer__text(v-show="state.openFlag") {{ state.answer }}
+          button.content__button(@click="answerStore.setOpenFlag(true)" v-if="state.openFlag === false") 答えを見る
 
 </template>
 
@@ -26,12 +27,13 @@ const props = withDefaults(defineProps<Props>(), {
   receiveMessage: ''
 })
 
-const placeholder: string = '出題者の入力したテキストがここに表示されます'
+const placeholder: string = '会話をして答えを当ててください。<br>”答えを見る”ボタンを押すと、出題者の入力したテキストが下に表示されます。'
 localStorage.saveKey != null ? answerStore.setAnswer(localStorage.saveKey) : answerStore.setAnswer(placeholder)
 
 // setupでthisは使えない。そこで、propで渡して、watchで値の変更を検知したら、setAnswerで更新して、リアクティブになるようにした。
 watch(() => props.receiveMessage, () => {
   answerStore.setAnswer(props.receiveMessage)
+  answerStore.setOpenFlag(false)
   // ブラウザをリロードしても値を保持できるように。
   localStorage.saveKey = props.receiveMessage
 })
@@ -45,7 +47,6 @@ watch(() => props.receiveMessage, () => {
 export default {
   data() {
     return {
-      openFlag:false
     }
   },
   computes: {
@@ -54,9 +55,6 @@ export default {
   mounted() {
   },
   methods: {
-    openFlagControl(flag) {
-      this.openFlag = flag
-    }
   }
 }
 </script>
@@ -67,7 +65,14 @@ export default {
   height: 100vh;
 }
 
-.t-answerer__contents{
+.content__answer{
+  padding:50px;
+  border:1px solid black;
+  .answer{
+    .answer__text{
+      @include font-set-pc(30,15,15,600)
+    }
+  }
 }
 
 </style>
