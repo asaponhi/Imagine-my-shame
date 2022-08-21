@@ -9,8 +9,8 @@
         .content
           .content__input
             .input
-              textarea.input__textarea(v-model="inputText" name="textarea" maxlength="500" placeholder="入力してください。" @keydown.enter.exact="keyDownEnter" @keyup.enter.exact="keyUpEnter")
-              //- textarea.input__textarea(v-model="inputText" name="textarea" maxlength="500" placeholder="口にするのは難しいあなたの恥や悩みを入力してください。" @keydown.enter.exact="keyDownEnter" @keyup.enter.exact="keyUpEnter")
+              //- textarea.input__textarea(v-model="inputText" name="textarea" maxlength="500" placeholder="入力してください。" @keydown.enter.exact="keyDownEnter" @keyup.enter.exact="keyUpEnter")
+              textarea.input__textarea(v-model="inputText" name="textarea" maxlength="500" placeholder="口にするのは難しいあなたの恥や悩みを入力してください。" @keydown.enter.exact="keyDownEnter" @keyup.enter.exact="keyUpEnter")
               button.input__submit(type="button" @click="onSendMessage()") 送信
           .content__output(v-if="outputFlag")
             .output
@@ -27,7 +27,8 @@ export default {
   data() {
     return {
       // socket
-      socket: new WebSocket("ws://localhost:3030"),
+      // socket: new WebSocket("ws://localhost:3030"),
+      socket: new WebSocket("wss://cloud.achex.ca/imagine-my-shame-1"),
       inputText: '',
       outputText: '',
       outputFlag: false
@@ -37,14 +38,17 @@ export default {
 
   },
   mounted() {
-    
   },
   methods: {
     onSendMessage() {
-      this.socket.send(JSON.stringify({
+      this.socket.send(JSON.stringify({ "auth": "user", "password": "1234" }));
+      this.socket.send(
+        JSON.stringify({
+        "to": "user",
         'action': 'send_message',
         'message': this.inputText
-      }))
+        })
+      )
       this.outputText = this.inputText
       this.outputFlag = true
       this.inputText = ""

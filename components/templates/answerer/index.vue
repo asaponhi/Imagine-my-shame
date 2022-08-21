@@ -31,7 +31,6 @@ localStorage.saveKey != null ? answerStore.setAnswer(localStorage.saveKey) : ans
 
 // setupでthisは使えない。そこで、propで渡して、watchで値の変更を検知したら、setAnswerで更新して、リアクティブになるようにした。
 watch(() => props.receiveMessage, () => {
-  console.log("setAnswer", props.receiveMessage)
   answerStore.setAnswer(props.receiveMessage)
   // ブラウザをリロードしても値を保持できるように。
   localStorage.saveKey = props.receiveMessage

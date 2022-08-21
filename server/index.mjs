@@ -4,10 +4,14 @@ PART1 こっちで上手く行く時とエラー出る時がある。その時�
 import express from 'express'
 import ws from 'ws'
 
+// const achexUrl = 'wss://cloud.achex.ca/test'
+// const achexUrl = 'wss://cloud.achex.ca/imagine-my-shame-1'
+// const host = achexUrl || 'localhost'
 const host = process.env.HOST || 'localhost'
 const port = process.env.PORT || 3030
 
 const wss = new ws.Server({ port: port });
+// const wss = new WebSocket(achexUrl);
 const app = express()
 
 wss.on('connection', function connection(s) {

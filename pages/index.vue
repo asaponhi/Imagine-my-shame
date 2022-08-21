@@ -31,7 +31,8 @@ export default {
       questionerFlag: true,
       answererFlag: true,
       // socket
-      socket: new WebSocket("ws://localhost:3030"),
+      // socket: new WebSocket("ws://localhost:3030"),
+      socket: new WebSocket("wss://cloud.achex.ca/imagine-my-shame-1"),
       receiveMessage: localStorage.saveKey != null ? localStorage.saveKey : ''
     }
   },
@@ -44,14 +45,17 @@ export default {
   methods: {
     onConnectWebSocket() {
       this.socket.onopen = () => {
+        this.socket.send(JSON.stringify({ "auth": "user", "password": "1234" }));
         // 受信 
         /*
         PART1 こっちで上手く行く時とエラー出る時がある。その時はPART２を動かす。
         */ 
         this.socket.onmessage = (e) => {
+          // auth時のレスポンスもmessageで来るので弾いておきます
           let resData = JSON.parse(e.data)
-          console.log("resData", resData)
+          if (resData.auth =='OK') return
           if (resData.action = 'send_message') {
+            console.log("resData", resData)
             this.receiveMessage = resData.message
           }
         }
